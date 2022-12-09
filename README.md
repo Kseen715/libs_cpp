@@ -1,9 +1,13 @@
 # libs
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Kseen715/imgs/main/favicon.ico?token=GHSAT0AAAAAABZP3VEEX2RTOIF434CW37Q4Y4TPXMA" />
+</p>
+
 Сборная солянка мелких библиотек.
 
 Все библиотеки готовы к использованию с CMake.
 
-**Список**
+## Список
 - **Алгоритмы**
   - objLib - Работа с файлами .obj
   - PIEquationLib - ...
@@ -19,3 +23,7 @@
 - **Инструменты**
   - bcwm - Инструменты для работы с терминалом Windows
   - concept - Концепты для C++20
+
+ ## Полезности
+- [**Пример оформления README**](https://github.com/GnuriaN/format-README)
+- [**cloc**](https://github.com/AlDanial/cloc) - Позволяет измерить количество строк во всех файлах директории

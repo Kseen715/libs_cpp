@@ -1,0 +1,1 @@
+cloc --by-file-by-lang --include-ext=c,cpp,h,hpp --exclude-dir=build,.vscode .
