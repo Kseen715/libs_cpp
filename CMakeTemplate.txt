@@ -1,0 +1,16 @@
+﻿cmake_minimum_required (VERSION 3.8)
+
+set(PROJECT_NAME "main")
+project (${PROJECT_NAME} VERSION 0.1.0)
+
+add_executable (CMakeTarget "main.cpp")
+
+add_subdirectory (libs)
+set(LIBS "lib1" "lib2")
+target_link_libraries (CMakeTarget ${LIBS})
+
+if (CMAKE_VERSION VERSION_GREATER 3.12)
+  set_property(TARGET CMakeTarget PROPERTY CXX_STANDARD 20)
+endif()
+
+install (TARGETS CMakeTarget DESTINATION bin)

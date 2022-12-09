@@ -1,0 +1,5 @@
+add_subdirectory(binMatrixLib)
+add_subdirectory(list8)
+add_subdirectory(string_form8)
+add_subdirectory(stack8)
+add_subdirectory(queueArray)

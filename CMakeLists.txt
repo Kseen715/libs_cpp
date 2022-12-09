@@ -1,0 +1,3 @@
+add_subdirectory(algorithms)
+add_subdirectory(dataStructures)
+add_subdirectory(utility)
