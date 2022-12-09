@@ -1,14 +1,14 @@
-﻿#include "binMatrix.h"
+﻿#include "binMatrix.hpp"
 
 binMatrix::binMatrix(std::initializer_list<std::initializer_list<bool>> list)
 {
-	for (auto& i : list)
+	for (auto &i : list)
 	{
 		mtr.push_back(std::vector<bool>(i));
 	}
 }
 
-std::ostream& operator<<(std::ostream& out, const binMatrix& mtr)
+std::ostream &operator<<(std::ostream &out, const binMatrix &mtr)
 {
 	for (int i = 0; i < mtr.mtr.size(); i++)
 	{
@@ -21,7 +21,7 @@ std::ostream& operator<<(std::ostream& out, const binMatrix& mtr)
 	return out;
 }
 
-binMatrix binMatrix::operator*(const binMatrix& other)
+binMatrix binMatrix::operator*(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -41,7 +41,7 @@ binMatrix binMatrix::operator*(const binMatrix& other)
 	return result;
 }
 
-binMatrix& binMatrix::operator*=(const binMatrix& other)
+binMatrix &binMatrix::operator*=(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -62,7 +62,7 @@ binMatrix& binMatrix::operator*=(const binMatrix& other)
 	return *this;
 }
 
-bool binMatrix::operator==(const binMatrix& other)
+bool binMatrix::operator==(const binMatrix &other)
 {
 	if (mtr.size() != other.mtr.size())
 	{
@@ -85,7 +85,7 @@ bool binMatrix::operator==(const binMatrix& other)
 	return true;
 }
 
-binMatrix binMatrix::operator-(const binMatrix& other)
+binMatrix binMatrix::operator-(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -100,7 +100,7 @@ binMatrix binMatrix::operator-(const binMatrix& other)
 	return result;
 }
 
-binMatrix& binMatrix::operator-=(const binMatrix& other)
+binMatrix &binMatrix::operator-=(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -116,7 +116,7 @@ binMatrix& binMatrix::operator-=(const binMatrix& other)
 	return *this;
 }
 
-binMatrix binMatrix::operator|(const binMatrix& other)
+binMatrix binMatrix::operator|(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -131,7 +131,7 @@ binMatrix binMatrix::operator|(const binMatrix& other)
 	return result;
 }
 
-binMatrix& binMatrix::operator|=(const binMatrix& other)
+binMatrix &binMatrix::operator|=(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -147,7 +147,7 @@ binMatrix& binMatrix::operator|=(const binMatrix& other)
 	return *this;
 }
 
-binMatrix binMatrix::operator&(const binMatrix& other)
+binMatrix binMatrix::operator&(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -162,7 +162,7 @@ binMatrix binMatrix::operator&(const binMatrix& other)
 	return result;
 }
 
-binMatrix& binMatrix::operator&=(const binMatrix& other)
+binMatrix &binMatrix::operator&=(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -178,7 +178,7 @@ binMatrix& binMatrix::operator&=(const binMatrix& other)
 	return *this;
 }
 
-binMatrix binMatrix::operator^(const binMatrix& other)
+binMatrix binMatrix::operator^(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -193,7 +193,7 @@ binMatrix binMatrix::operator^(const binMatrix& other)
 	return result;
 }
 
-binMatrix& binMatrix::operator^=(const binMatrix& other)
+binMatrix &binMatrix::operator^=(const binMatrix &other)
 {
 	binMatrix result;
 	for (int i = 0; i < mtr.size(); i++)
@@ -442,8 +442,7 @@ binMatrix binMatrix::getTransitiveClosureWarshall()
 		{
 			for (int y = 0; y < mtr.size(); y++)
 			{
-				result.mtr[x][y] = result.mtr[x][y]
-					|| (result.mtr[x][z] && result.mtr[z][y]);
+				result.mtr[x][y] = result.mtr[x][y] || (result.mtr[x][z] && result.mtr[z][y]);
 			}
 		}
 	}
@@ -478,4 +477,5 @@ binMatrix binMatrix::getRandomRelation(int size, int pairCount)
 		result.mtr[x][y] = 1;
 	}
 	return result;
-}static;
+}
+static;

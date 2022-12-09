@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __KSI_LIST_8_HPP
+#define __KSI_LIST_8_HPP
 
 #include <cstring>
 #include <iostream>
@@ -81,3 +82,5 @@ void CopyList(List *L1, List *L2);
 
 // EmptyList � �������� : �������� �� ������.
 int EmptyList(List *L);
+
+#endif // __KSI_LIST_8_HPP

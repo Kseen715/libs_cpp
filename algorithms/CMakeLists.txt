@@ -1,1 +1,4 @@
 add_subdirectory(workTimeLib)
+add_subdirectory(objLib)
+add_subdirectory(rpnLogic)
+add_subdirectory(searchAlgs)

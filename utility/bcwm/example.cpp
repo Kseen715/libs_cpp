@@ -5,30 +5,30 @@
 int main()
 {
 	std::cout << "Hello World!\n";
-	bcwm::systemPause();
+	bcwm::_system::pause();
 	bcwm::setConsoleSize(40, 60);
-	bcwm::systemPause();
+	bcwm::_system::pause();
 	bcwm::setTextColor(6);
 	std::cout << "Hello World!\n";
-	bcwm::systemPause();
-	bcwm::setTextColor(bcwm::red);
+	bcwm::_system::pause();
+	bcwm::setTextColor(bcwm::_color::red);
 	std::cout << "Hello World!\n";
-	bcwm::systemPause();
-	bcwm::setTextAndBackgroundColor(bcwm::green, bcwm::red);
+	bcwm::_system::pause();
+	bcwm::setTextAndBackgroundColor(bcwm::_color::green, bcwm::_color::red);
 	std::cout << "Hello World!\n";
-	bcwm::systemPause();
-	bcwm::setTextBackgroundColor(bcwm::white);
+	bcwm::_system::pause();
+	bcwm::setTextBackgroundColor(bcwm::_color::white);
 	std::cout << "Hello World!\n";
-	bcwm::systemPause();
-	bcwm::setConsoleColor(bcwm::red, bcwm::white);
+	bcwm::_system::pause();
+	bcwm::setConsoleColor(bcwm::_color::red, bcwm::_color::white);
 	std::cout << "Hello World!\n";
-	bcwm::systemPause();
-	bcwm::setTextColor(bcwm::green);
+	bcwm::_system::pause();
+	bcwm::setTextColor(bcwm::_color::green);
 	std::cout << "Hello World!\n";
-	bcwm::systemPause();
-	bcwm::setTextColor(bcwm::blue);
+	bcwm::_system::pause();
+	bcwm::setTextColor(bcwm::_color::blue);
 	std::cout << "Hello World!\n";
-	bcwm::systemPause();
+	bcwm::_system::pause();
 
 	return 0;
 }

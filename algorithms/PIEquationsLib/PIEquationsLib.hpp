@@ -1,33 +1,40 @@
-#pragma once
-#ifndef __P_I_EQUATIONS_LIB_H
-#define __P_I_EQUATIONS_LIB_H
+#ifndef __KSI_P_I_EQUATIONS_LIB_HPP
+#define __KSI_P_I_EQUATIONS_LIB_HPP
 
 #include <iostream>
 #include <vector>
 
-#define PIE_UNIVERSUM std::vector<int>{}    //Redefine with some vector<int>
-#define PIE_LEFT PIEquation({}, PIE_UNIVERSUM)  //Redefine with left equation
-#define PIE_RIGHT PIEquation({}, PIE_UNIVERSUM) //Redefine with right equation
+#define PIE_UNIVERSUM \
+	std::vector<int>  \
+	{                 \
+	}											// Redefine with some vector<int>
+#define PIE_LEFT PIEquation({}, PIE_UNIVERSUM)	// Redefine with left equation
+#define PIE_RIGHT PIEquation({}, PIE_UNIVERSUM) // Redefine with right equation
 
 /*
 Only typenames, that have operator<<
 */
-template<typename T>
+template <typename T>
 concept coutable = requires(T a) {
-	{ std::cout << a };
-};
+					   {
+						   std::cout << a
+					   };
+				   };
 
 /*
 Operator << for std::vector<> with template type T
 */
-template<coutable T>
-std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec) {
-	if (vec.size() == 0) {
+template <coutable T>
+std::ostream &operator<<(std::ostream &os, const std::vector<T> &vec)
+{
+	if (vec.size() == 0)
+	{
 		os << "{}";
 		return os;
 	}
 	os << "{";
-	for (int i = 0; i < vec.size() - 1; ++i) {
+	for (int i = 0; i < vec.size() - 1; ++i)
+	{
 		os << vec.at(i) << ", ";
 	}
 	os << vec.at(vec.size() - 1) << "}";
@@ -38,7 +45,7 @@ std::ostream& operator<<(std::ostream& os, const std::vector<T>& vec) {
 @param: key - int, array - std::vector<int>
 @return: bool
 */
-bool _search(int key, const std::vector<int>& array);
+bool _search(int key, const std::vector<int> &array);
 
 /*
 @brief: returns true if vecA == vecB
@@ -74,9 +81,11 @@ std::vector<int> _xor(std::vector<int> vecA, std::vector<int> vecB);
 
 std::vector<int> _not(std::vector<int> vecA, std::vector<int> vecU);
 
-class PIEquation {
+class PIEquation
+{
 protected:
 	std::vector<int> equation, universum;
+
 public:
 	/*
 	Default constructor
@@ -86,7 +95,7 @@ public:
 	/*
 	Constructor with another equation
 	*/
-	PIEquation(const PIEquation& other);
+	PIEquation(const PIEquation &other);
 
 	/*
 	Constructor with universum only
@@ -101,7 +110,7 @@ public:
 	/*
 	Opeartor =
 	*/
-	PIEquation& operator=(const PIEquation& other);
+	PIEquation &operator=(const PIEquation &other);
 
 	/*
 	Destructor
@@ -134,33 +143,33 @@ public:
 	*/
 	std::vector<int> getEq();
 
-	bool operator==(const PIEquation& other);
+	bool operator==(const PIEquation &other);
 
-	bool operator!=(const PIEquation& other);
+	bool operator!=(const PIEquation &other);
 
-	bool operator<=(const PIEquation& other);
+	bool operator<=(const PIEquation &other);
 
-	bool operator>=(const PIEquation& other);
+	bool operator>=(const PIEquation &other);
 
-	bool operator<(const PIEquation& other);
+	bool operator<(const PIEquation &other);
 
-	bool operator>(const PIEquation& other);
+	bool operator>(const PIEquation &other);
 
-	PIEquation operator|(const PIEquation& other);
+	PIEquation operator|(const PIEquation &other);
 
-	PIEquation operator-(const PIEquation& other);
+	PIEquation operator-(const PIEquation &other);
 
-	PIEquation operator&(const PIEquation& other);
+	PIEquation operator&(const PIEquation &other);
 
-	PIEquation operator^(const PIEquation& other);
+	PIEquation operator^(const PIEquation &other);
 
 	PIEquation operator~();
 
-	friend std::ostream& operator<<(std::ostream& os, const PIEquation& other);
+	friend std::ostream &operator<<(std::ostream &os, const PIEquation &other);
 
 	bool isEqualToUniversum();
 };
 
-std::ostream& operator<<(std::ostream& os, const PIEquation& other);
+std::ostream &operator<<(std::ostream &os, const PIEquation &other);
 
-#endif //__P_I_EQUATIONS_LIB_H
+#endif //__KSI_P_I_EQUATIONS_LIB_HPP

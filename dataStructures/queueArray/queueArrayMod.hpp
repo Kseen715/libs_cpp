@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __KSI_QUEUE_ARRAY_MOD_HPP
+#define __KSI_QUEUE_ARRAY_MOD_HPP
 
 #include <iostream>
 
@@ -20,3 +21,5 @@ bool isEmptyFifo(Fifo *f);
 void printFifo(Fifo *f);
 
 void doneFifo(Fifo *f);
+
+#endif // __KSI_QUEUE_ARRAY_MOD_HPP

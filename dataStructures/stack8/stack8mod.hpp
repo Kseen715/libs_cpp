@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __KSI_STACK_8_MOD_HPP
+#define __KSI_STACK_8_MOD_HPP
 
 // Интерфейс стека
 
@@ -62,3 +63,5 @@ T popStack(Stack *s)
 
 // Возвращает пустой ли стек
 bool isEmptyStack(Stack *s);
+
+#endif // __KSI_STACK_8_MOD_HPP

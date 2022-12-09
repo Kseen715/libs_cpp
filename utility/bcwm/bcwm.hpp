@@ -1,6 +1,5 @@
-#pragma once
-#ifndef __BASIC_CONSOLE_WINDOW_MANAGER_LIB_H
-#define __BASIC_CONSOLE_WINDOW_MANAGER_LIB_H
+#ifndef __KSI_BASIC_CONSOLE_WINDOW_MANAGER_LIB_HPP
+#define __KSI_BASIC_CONSOLE_WINDOW_MANAGER_LIB_HPP
 
 #include <windows.h>
 #include <string>
@@ -57,4 +56,4 @@ namespace bcwm
 	void setConsoleTitle(char *title);
 };
 
-#endif // __BASIC_CONSOLE_WINDOW_MANAGER_LIB_H
+#endif // __KSI_BASIC_CONSOLE_WINDOW_MANAGER_LIB_HPP

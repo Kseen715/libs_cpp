@@ -1,16 +1,18 @@
-#include "objLib.h"
+#include "objLib.hpp"
 
 namespace OBJ
 {
-    void toObj(const std::vector<vec2>& points, std::string fileName)
+    void toObj(const std::vector<vec2> &points, std::string fileName)
     {
         fileName += ".obj";
         std::ofstream file(fileName);
         if (file.is_open())
         {
             file << "# " << fileName;
-            for (auto& point : points) {
-                file << std::endl << "v " << point.x << " " << point.y << " " << 0.0 << " " << 1.0;
+            for (auto &point : points)
+            {
+                file << std::endl
+                     << "v " << point.x << " " << point.y << " " << 0.0 << " " << 1.0;
             }
             file.close();
             file.close();
@@ -33,7 +35,7 @@ namespace OBJ
                     std::string x, y, z, w;
                     std::istringstream iss(line);
                     iss >> x >> y >> z >> w;
-                    points.push_back({ std::stof(y), std::stof(z) });
+                    points.push_back({std::stof(y), std::stof(z)});
                 }
             }
             file.close();
@@ -42,16 +44,18 @@ namespace OBJ
     }
 
 #ifdef IMGUI_API
-    //vector<ImVec2> to obj file (x,y,z[,w]), w = 1
-    void toObj(const std::vector<ImVec2>& points, std::string fileName)
+    // vector<ImVec2> to obj file (x,y,z[,w]), w = 1
+    void toObj(const std::vector<ImVec2> &points, std::string fileName)
     {
         fileName += ".obj";
         std::ofstream file(fileName);
         if (file.is_open())
         {
             file << "# " << fileName;
-            for (auto& point : points) {
-                file << std::endl << "v " << point.x << " " << point.y << " " << 0.0 << " " << 1.0;
+            for (auto &point : points)
+            {
+                file << std::endl
+                     << "v " << point.x << " " << point.y << " " << 0.0 << " " << 1.0;
             }
             file.close();
         }
@@ -80,5 +84,5 @@ namespace OBJ
         return points;
     }
 
-#endif //IMGUI_API
+#endif // IMGUI_API
 }

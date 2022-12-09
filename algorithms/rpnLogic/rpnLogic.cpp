@@ -1,4 +1,4 @@
-#include "rpn.h"
+#include "rpnLogic.hpp"
 
 // Выводит в консоль Map map.
 void print(std::map<Token, Token> map)

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __KSI_STACK_8_HPP
+#define __KSI_STACK_8_HPP
 
 #include "list8mod.hpp"
 
@@ -21,3 +22,5 @@ int EmptyStack(Stack s); // Проверка: стек пуст?
 void ReadStack(Stack s, BaseTypeList8 *E); /* Прочитать элемент из вершины стека */
 
 void DoneStack(Stack *s); // Уничтожить стек
+
+#endif // __KSI_STACK_8_MOD_HPP

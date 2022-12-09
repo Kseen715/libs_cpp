@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __KSI_LIST_8_MOD_HPP
+#define __KSI_LIST_8_MOD_HPP
 
 #include "list8.hpp"
 
@@ -35,3 +36,5 @@ void PrintPolynom(List *P, char y);
 // Ввод многочлена P с клавиатуры с переменной y
 template <typename T>
 void WritePolynom(List *L, char y);
+
+#endif // __KSI_LIST_8_MOD_HPP

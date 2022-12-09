@@ -1,6 +1,5 @@
-#pragma once
-#ifndef __FORM8_H
-#define __FORM8_H
+#ifndef __KSI_FORM8_HPP
+#define __KSI_FORM8_HPP
 
 #include <cstdio>
 #include <malloc.h>
@@ -74,4 +73,4 @@ unsigned Pos(string1 SubS, string1 s);
 // Удаляет строку s из динамической памяти.
 void DoneStr(string1 s);
 
-#endif // __FORM8_H
+#endif // __KSI_FORM8_HPP

@@ -1,9 +1,10 @@
-#pragma once
+#ifndef __KSI_STD_CONCEPTS_HPP
+#define __KSI_STD_CONCEPTS_HPP
 
 #include <iostream>
 
-//Концепт для типа данных.
-//Должны присутствовать операторы сравнения.
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
+//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 template <typename T>
 concept comparable = requires(T a, T b) {
 	{ a < b } -> std::convertible_to<bool>;
@@ -14,25 +15,25 @@ concept comparable = requires(T a, T b) {
 	{ a != b } -> std::convertible_to<bool>;
 };
 
-//Концепт для типов с методом ostream
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ostream
 template <typename T>
 concept coutable = requires(T a) {
 	{ std::cout << a } -> std::convertible_to<std::ostream&>;
 };
 
-//Концепт для типов с методом ввода istream
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ istream
 template <typename T>
 concept cinable = requires(T a) {
 	{ std::cin >> a } -> std::convertible_to<std::istream&>;
 };
 
-//Концепт для типов с методом присваивания
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 template <typename T>
 concept assignable = requires(T a, T b) {
 	{ a = b } -> std::convertible_to<T>;
 };
 
-//Концепт для типов данных с методами арифметических операций
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 template <typename T>
 concept arithmetic = requires(T a, T b) {
 	{ a + b } -> std::convertible_to<T>;
@@ -45,3 +46,5 @@ concept arithmetic = requires(T a, T b) {
 	{ a /= b } -> std::convertible_to<T>;
 	{ a = b } -> std::convertible_to<T>;
 };
+
+#endif // __KSI_STD_CONCEPTS_HPP

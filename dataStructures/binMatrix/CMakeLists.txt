@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-set(PROJECT_NAME binMatrixLib)
+set(PROJECT_NAME binMatrix)
 project(${PROJECT_NAME} VERSION 0.1.0)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
@@ -7,7 +7,7 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
 endif()
 
 set(SOURCES binMatrix.cpp)
-set(HEADERS binMatrix.h)
+set(HEADERS binMatrix.hpp)
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

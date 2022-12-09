@@ -1,4 +1,4 @@
-#include "form8.h"
+#include "form8.hpp"
 
 // Переменная ошибок.
 char StrError = StrNotInit;

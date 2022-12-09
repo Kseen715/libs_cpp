@@ -1,6 +1,5 @@
-#pragma once
-#ifndef RPN_H
-#define RPN_H
+#ifndef __KSI_RPN_HPP
+#define __KSI_RPN_HPP
 
 #include <iostream>
 #include <string>
@@ -146,4 +145,4 @@ void printTrueCombinations(std::string expr);
 
 // Выводит ложные решения логического выражения expr.
 void printFalseCombinations(std::string expr);
-#endif // RPN_H
+#endif // __KSI_RPN_HPP
