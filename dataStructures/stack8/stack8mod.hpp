@@ -41,7 +41,7 @@ void printStack(Stack *s)
         ReadStack(*s, &E);
         MovePtr((List *)s);
         std::cout << *(T *)E << " " << std::endl;
-        delete[](T *) E;
+        delete[] (T *)E;
     }
     s->ptr = tempPtrHolder;
 }
@@ -57,11 +57,32 @@ T popStack(Stack *s)
     BaseTypeList8 E = new T[1];
     GetStack(s, &E);
     T temp = *(T *)E;
-    delete[](T *) E;
+    delete[] (T *)E;
     return temp;
 }
 
 // Возвращает пустой ли стек
 bool isEmptyStack(Stack *s);
+
+// Возвращает i-ый элемент стека s
+template <typename T>
+T *getStackElement(Stack *s, size_t _i)
+{
+    // use popStack, create an array of elements,  and then pushStack them back
+    unsigned tempPtrHolder = s->ptr;
+    unsigned n = s->N;
+    s->ptr = 1;
+    T *array = new T[n];
+    for (unsigned i = 0; i < n; i++)
+    {
+        BaseTypeList8 E = new T[1];
+        ReadStack(*s, &E);
+        MovePtr((List *)s);
+        array[i] = *(T *)E;
+        delete[] (T *)E;
+    }
+    s->ptr = tempPtrHolder;
+    return array + _i;
+}
 
 #endif // __KSI_STACK_8_MOD_HPP
