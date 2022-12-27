@@ -42,7 +42,7 @@ void PrintList(List *L)
     L->ptr = 1;
     for (unsigned i = 0; i < n; i++)
     {
-        BaseType E = new T[1];
+        tree8BaseType E = new T[1];
         std::cout << i + 1 << ": ";
         ReadList(L, &E);
         MovePtr(L);
@@ -58,7 +58,7 @@ void PrintDestroyList(List *L)
     unsigned n = L->N;
     for (unsigned i = 0; i < n; i++)
     {
-        BaseType E = new T[1];
+        tree8BaseType E = new T[1];
         std::cout << i + 1 << ": ";
         GetList(L, &E);
         std::cout << *(T *)E << " " << std::endl;
@@ -81,7 +81,7 @@ void PrintPolynom(List *P, char y)
     P->ptr = 1;
     for (unsigned i = 0; i < n; i++)
     {
-        BaseType E = new T[1];
+        tree8BaseType E = new T[1];
         ReadList(P, &E);
         MovePtr(P);
         if (*(T *)E != 0)
