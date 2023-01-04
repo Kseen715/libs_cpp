@@ -2,83 +2,91 @@
 
 short treeError = treeOk;
 
-// Инициализация дерева.
 void initTree(tree *T, unsigned size)
 {
-    T->pBuf = new mem[size];
-    T->size = size;
-    T->ptr = 0;
+    T->pBuf = new mem[size]; // Выделение памяти под массив элементов.
+    T->size = size;          // Запись размера массива.
+    T->ptr = 0;              // Указатель на текущий элемент.
 }
 
-// Создание корня.
 void createRoot(tree *T)
 {
-    T->ptr = 1;
-    T->pBuf[T->ptr - 1]->data = new tree8BaseType;
-    T->pBuf[T->ptr - 1]->flag = 0;
+    T->ptr = 1;                                    // Указатель на корень.
+    T->pBuf[T->ptr - 1]->data = new tree8BaseType; // Выделение памяти под
+                                                   // корень.
+    T->pBuf[T->ptr - 1]->flag = 0;                 // Указание, что корень
+                                                   // пустой.
 }
 
-// Запись данных по текущему указателю.
 void writeDataTree(tree *T, tree8BaseType E)
 {
-    T->pBuf[T->ptr - 1]->data = E;
-    T->pBuf[T->ptr - 1]->flag = 1;
+    T->pBuf[T->ptr - 1]->data = E; // Запись данных в текущий элемент.
+    T->pBuf[T->ptr - 1]->flag = 1; // Указание, что элемент не пустой.
 }
 
-// Чтение данных.
 void readDataTree(tree *T, tree8BaseType *E)
 {
-    *E = T->pBuf[T->ptr - 1]->data;
+    *E = T->pBuf[T->ptr - 1]->data; // Чтение данных из текущего элемента.
 }
 
-// 1 — есть левый сын, 0 — нет.
 int isLSon(tree *T)
 {
-    if (T->ptr * 2 + 1 < T->size)
-        return T->pBuf[T->ptr * 2 - 1]->flag == 1;
-    else
+    if (T->ptr * 2 + 1 < T->size)                  // Если указатель на левого
+                                                   // сына не выходит за
+                                                   // границы массива.
+        return T->pBuf[T->ptr * 2 - 1]->flag == 1; // Возвращаем 1, если левый
+                                                   // сын не пустой.
+    else                                           // Иначе возвращаем 0.
         return 0;
 }
 
-// 1 — есть правый сын, 0 — нет.
 int isRSon(tree *T)
 {
-    if (T->ptr * 2 + 2 < T->size)
-        return T->pBuf[T->ptr * 2 + 1 - 1]->flag == 1;
-    else
+    if (T->ptr * 2 + 2 < T->size)                      // Если указатель на
+                                                       // правого сына не
+                                                       // выходит за границы
+                                                       // массива.
+        return T->pBuf[T->ptr * 2 + 1 - 1]->flag == 1; // Возвращаем 1, если
+                                                       // правый сын не пустой.
+    else                                               // Иначе возвращаем 0.
         return 0;
 }
 
-// Перейти к левому сыну, где T — адрес ячейки, содержащей адрес текущей
-// вершины, TS — адрес ячейки, содержащей адрес корня левого поддерева(левого
-// сына).
 void moveToLSon(tree *T_down, tree *T_up)
 {
-    if (T_down)
-        T_down->ptr = (T_down->ptr * 2);
-    if (T_up)
-        T_up->ptr = (T_up->ptr) / 2;
+    if (T_down)                          // Если указатель на текущий элемент не
+                                         // равен nullptr.
+        T_down->ptr = (T_down->ptr * 2); // Указатель на текущий элемент
+                                         // устанавливается на левого сына.
+    if (T_up)                            // Если указатель на родителя не равен
+                                         // nullptr.
+        T_up->ptr = (T_up->ptr) / 2;     // Указатель на родителя
+                                         // устанавливается на текущий элемент.
 }
 
-// Перейти к правому сыну.
 void moveToRSon(tree *T_down, tree *T_up)
 {
-    if (T_down)
-        T_down->ptr = (T_down->ptr * 2) + 1;
-    if (T_up)
-        T_up->ptr = (T_up->ptr - 1) / 2;
+    if (T_down)                              // Если указатель на текущий
+                                             // элемент не равен nullptr.
+        T_down->ptr = (T_down->ptr * 2) + 1; // Указатель на текущий элемент
+                                             // устанавливается на правого сына.
+    if (T_up)                                // Если указатель на родителя не
+                                             // равен nullptr.
+        T_up->ptr = (T_up->ptr - 1) / 2;     // Указатель на родителя
+                                             // устанавливается на текущий
+                                             // элемент.
 }
 
-// 1 — пустое дерево,0 — не пустое.
 int isEmptyTree(tree *T)
 {
-    return T->pBuf[0]->flag == 0;
+    return T->pBuf[0]->flag == 0; // Возвращаем 1, если корень пустой.
 }
 
-// Удаление листа и данных в нем.
 void delTree(tree *T)
 {
-    delete[] (T->pBuf[T->ptr - 1]->data);
-    T->pBuf[T->ptr - 1]->data = nullptr;
-    T->pBuf[T->ptr - 1]->flag = 0;
+    delete[] (T->pBuf[T->ptr - 1]->data); // Удаляем данные из текущего
+                                          // элемента.
+    T->pBuf[T->ptr - 1]->data = nullptr;  // Указатель на данные устанавливаем
+                                          // в nullptr.
+    T->pBuf[T->ptr - 1]->flag = 0;        // Указание, что элемент пустой.
 }
