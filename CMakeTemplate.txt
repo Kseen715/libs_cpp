@@ -1,16 +1,57 @@
-﻿cmake_minimum_required (VERSION 3.8)
+﻿# Settings =====================================================================
+set(CMAKE_MIN_VERSION "3.8")            # Required CMake version.
+set(CMAKE_CXX_STANDARD 20)              # C++ standard.
+set(CMAKE_CXX_STANDARD_REQUIRED ON)     # C++ standard required.
+set(PROJECT_NAME "")                    # Name of the project.
+set(PROJECT_VERSION "0.1.0")            # Version of the project.
+set(PROJECT_EXE_NAME "main")            # Name of the executable to be created.
+set(KSI_GTEST_DO OFF)                   # GTest (ON/OFF).
+set(KSI_GTEST_CC_NAME "KSI_unitTest")   # Name for GTest executable.
+set(KSI_GTEST_CC_FILE "test.cc")        # Name for GTest source file.
+set(ADD_LIBS OFF)                       # Add libraries (ON/OFF).
+set(LIBS "")                            # Libraries to be included.
+set(SOURCE_FILES "main.cpp")            # Source files.
+# ==============================================================================
 
-set(PROJECT_NAME "main")
-project (${PROJECT_NAME} VERSION 0.1.0)
+cmake_minimum_required (VERSION ${CMAKE_MIN_VERSION})
 
-add_executable (CMakeTarget "main.cpp")
+project (${PROJECT_NAME} VERSION ${PROJECT_VERSION})
 
-add_subdirectory (libs)
-set(LIBS "lib1" "lib2")
-target_link_libraries (CMakeTarget ${LIBS})
+# Create executable from source files ==========================================
+add_executable (${PROJECT_EXE_NAME} ${SOURCE_FILES})
+# ==============================================================================
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET CMakeTarget PROPERTY CXX_STANDARD 20)
+# Include libraries ============================================================
+if (${ADD_LIBS})
+  add_subdirectory (libs)
+  target_link_libraries (${PROJECT_EXE_NAME} ${LIBS})
 endif()
+# ==============================================================================
 
-install (TARGETS CMakeTarget DESTINATION bin)
+# Include GTest ================================================================
+if (${KSI_GTEST_DO})
+  set(gtest_force_shared_crt ON CACHE BOOL "Always use msvcrt.dll")
+  ADD_SUBDIRECTORY(googletest)
+  # include(CTest) # You can use this command instead enable_testing() it will
+                   # do the same and set up testing environment.
+  enable_testing()
+  
+  include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+  
+  add_executable(
+    ${KSI_GTEST_CC_NAME} 
+    ${KSI_GTEST_CC_FILE}
+  )
+  target_link_libraries(
+    ${KSI_GTEST_CC_NAME} 
+    GTest::gtest_main
+    ${LIBS}
+  )
+  include(GoogleTest)
+  gtest_discover_tests(${KSI_GTEST_CC_NAME})
+endif()
+# ==============================================================================
+
+# Install target ===============================================================
+install (TARGETS ${PROJECT_EXE_NAME} DESTINATION bin)
+# ==============================================================================

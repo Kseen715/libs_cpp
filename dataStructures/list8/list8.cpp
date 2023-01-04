@@ -11,11 +11,11 @@ void InitList(List *L, unsigned SizeMem)
 	ListError = ListOk;
 }
 
-void PutList(List *L, BaseType E)
+void PutList(List *L, tree8BaseType E)
 {
 	if (L->N < L->SizeMem)
 	{
-		void *tmp = new char[sizeof(BaseType)]; // Выделение памяти под информационную часть элемента
+		void *tmp = new char[sizeof(tree8BaseType)]; // Выделение памяти под информационную часть элемента
 		*(int *)tmp = *(int *)E;				// Копирование информационной части элемента
 		(*L->PMemList)[L->ptr++] = tmp;			// Запись адреса в массив адресов
 		L->N++;									// Увеличение количества элементов в списке
@@ -26,7 +26,7 @@ void PutList(List *L, BaseType E)
 	}
 }
 
-void GetList(List *L, BaseType *E)
+void GetList(List *L, tree8BaseType *E)
 {
 	if (L->N > 0)
 	{
@@ -44,7 +44,7 @@ void GetList(List *L, BaseType *E)
 }
 
 // Checked
-void ReadList(List *L, BaseType *E)
+void ReadList(List *L, tree8BaseType *E)
 {
 	if (L->N > 0)
 	{
@@ -117,7 +117,7 @@ void CopyList(List *L1, List *L2)
 	L2->N = L1->N;
 	for (unsigned int i = 0; i < L1->N; i++)
 	{
-		void *tmp = new char[sizeof(BaseType)];	  // Выделение памяти под информационную часть элемента
+		void *tmp = new char[sizeof(tree8BaseType)];	  // Выделение памяти под информационную часть элемента
 		*(int *)tmp = *(int *)(*L1->PMemList)[i]; // Копирование информационной части элемента
 		(*L2->PMemList)[i] = tmp;				  // Запись адреса в массив адресов
 	}
