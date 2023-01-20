@@ -85,6 +85,29 @@ bool binMatrix::operator==(const binMatrix &other)
 	return true;
 }
 
+bool binMatrix::operator!=(const binMatrix &other)
+{
+	if (mtr.size() != other.mtr.size())
+	{
+		return true;
+	}
+	for (int i = 0; i < mtr.size(); i++)
+	{
+		if (mtr[i].size() != other.mtr[i].size())
+		{
+			return true;
+		}
+		for (int j = 0; j < mtr[i].size(); j++)
+		{
+			if (mtr[i][j] != other.mtr[i][j])
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 binMatrix binMatrix::operator-(const binMatrix &other)
 {
 	binMatrix result;

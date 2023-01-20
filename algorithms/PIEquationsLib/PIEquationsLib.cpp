@@ -12,6 +12,14 @@ bool _search(int key, const std::vector<int> &array)
 	return false;
 }
 
+/**
+ * Функция _isEqual() проверяет равенство двух векторов.
+ *
+ * @param vecA Первый вектор.
+ * @param vecB Второй вектор.
+ *
+ * @return true, если элементы двух векторов совпадают, false - иначе.
+ */
 bool _isEqual(std::vector<int> vecA, std::vector<int> vecB)
 {
 	int i = 0;
@@ -24,6 +32,14 @@ bool _isEqual(std::vector<int> vecA, std::vector<int> vecB)
 	return flag;
 }
 
+/**
+ * _isIncluded() проверяет, входит ли последовательность vecA в vecB.
+ *
+ * @param vecA - последовательность, которую нужно проверить.
+ * @param vecB - последовательность, содержащая vecA.
+ *
+ * @return true, если vecA является частью vecB; false - иначе.
+ */
 bool _isIncluded(std::vector<int> vecA, std::vector<int> vecB)
 {
 	bool flag = vecA.size() <= vecB.size() && vecA.at(vecA.size() - 1) <= vecB.at(vecB.size() - 1);
@@ -273,6 +289,7 @@ bool PIEquation::operator>(const PIEquation &other)
 	return *this >= other && *this != other;
 }
 
+// Конъюнкция | Дуга радуга
 PIEquation PIEquation::operator|(const PIEquation &other)
 {
 	return PIEquation(_or(this->equation, other.equation), this->universum);
@@ -283,6 +300,7 @@ PIEquation PIEquation::operator-(const PIEquation &other)
 	return PIEquation(_diff(this->equation, other.equation), this->universum);
 }
 
+// Дизъюнкция | Чашка
 PIEquation PIEquation::operator&(const PIEquation &other)
 {
 	return PIEquation(_and(this->equation, other.equation), this->universum);
@@ -305,9 +323,15 @@ bool PIEquation::isEqualToUniversum()
 
 std::ostream &operator<<(std::ostream &os, const PIEquation &other)
 {
-	for (int i = 0; i < other.equation.size(); i++)
+	if (other.equation.size() == 0)
 	{
-		os << other.equation.at(i);
+		os << "Empty";
+		return os;
 	}
+	for (int i = 0; i < other.equation.size() - 1; i++)
+	{
+		os << other.equation.at(i) << ",";
+	}
+	os << other.equation.at(other.equation.size() - 1);
 	return os;
 }
