@@ -47,6 +47,9 @@ public:
 	// operator== | Равенство.
 	bool operator==(const binMatrix &other);
 
+	// operator!= | Неравенство.
+	bool operator!=(const binMatrix &other);
+
 	// operator- | Разность.
 	binMatrix operator-(const binMatrix &other);
 
