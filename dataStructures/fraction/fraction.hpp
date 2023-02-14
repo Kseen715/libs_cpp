@@ -116,6 +116,24 @@ namespace KSI
 
                 // cast int to fraction
                 fraction &operator=(int i);
+                fraction &operator+=(int i);
+                fraction &operator-=(int i);
+                fraction &operator*=(int i);
+                fraction &operator/=(int i);
+
+                fraction operator+(int i) const;
+                fraction operator-(int i) const;
+                fraction operator*(int i) const;
+                fraction operator/(int i) const;
+
+                bool operator==(int i) const;
+                bool operator!=(int i) const;
+                bool operator<(int i) const;
+                bool operator>(int i) const;
+                bool operator<=(int i) const;
+                bool operator>=(int i) const;
+
+                
 
         };
 }

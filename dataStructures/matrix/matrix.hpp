@@ -32,7 +32,7 @@ namespace KSI
          * @param cols Количество столбцов.
          * @return Двумерный вектор (матрица).
          */
-        matrix(size_t rows_, size_t cols_)
+        matrix(size_t cols_, size_t rows_)
         {
             this->rows = rows_;
             this->cols = cols_;
@@ -651,14 +651,160 @@ namespace KSI
             return inv;
         }
 
-        // // use empty vector as default argument
-        // std::string getSysLinearEquationsString(
-        //     std::vector<std::string> &vars = std::vector<std::string>()) const
-        // {
-        //     std::stringstream ss;
+        // use empty vector as default argument
+        std::string getSysLinearEquationsString(
+            std::vector<std::string> vars = std::vector<std::string>()) const
+        {
+            std::stringstream ss;
+            if (vars.size() != cols - 1)
+            {
+                vars.clear();
+                for (size_t i = 0; i < cols - 1; ++i)
+                {
+                    vars.push_back("x" + std::to_string(i + 1));
+                }
+            }
 
-        //     return ss.str();
-        // }
+            for (size_t i = 0; i < rows; ++i)
+            {
+                if (i == 0)
+                {
+                    ss << "/ ";
+                }
+                else if (i == rows - 1)
+                {
+                    ss << "\\ ";
+                }
+                else
+                {
+                    ss << "| ";
+                }
+                for (size_t j = 0; j < cols - 1; ++j)
+                {
+                    if (data[i][j] == 0)
+                    {
+                        continue;
+                    }
+                    ss << data[i][j] << "*" << vars[j]
+                       << (j == cols - 2 ? "" : " + ");
+                }
+                ss << " = " << data[i][cols - 1] << std::endl;
+            }
+            return ss.str();
+        }
+
+        // determinant using Gauss method, count of swaps used to get sign
+        T determinant() const
+        {
+            if (!isSquare())
+            {
+                throw std::invalid_argument("Matrix must be square");
+            }
+
+            matrix result(*this);
+            size_t swaps = 0;
+
+            for (size_t i = 0; i < rows; ++i)
+            {
+                if (result(i, i) == 0)
+                {
+                    size_t j = i + 1;
+                    while (j < rows && result(j, i) == 0)
+                    {
+                        ++j;
+                    }
+
+                    if (j == rows)
+                    {
+                        return 0;
+                    }
+
+                    result.swapRows(i, j);
+                    ++swaps;
+                }
+
+                for (size_t j = i + 1; j < rows; ++j)
+                {
+                    T coef = result(j, i) / result(i, i);
+                    for (size_t k = i; k < cols; ++k)
+                    {
+                        result(j, k) -= coef * result(i, k);
+                    }
+                }
+            }
+
+            T det = 1;
+            for (size_t i = 0; i < rows; ++i)
+            {
+                det *= result(i, i);
+            }
+
+            det *= (swaps % 2 == 0 ? 1 : -1);
+            return det;
+        }
+
+        // solve system of linear equations using Gauss-Jordan elimination
+        std::vector<T> solveSysLinearEquations() const
+        {
+            matrix result(*this);
+
+            for (size_t i = 0; i < rows; ++i)
+            {
+                if (result(i, i) == 0)
+                {
+                    size_t j = i + 1;
+                    while (j < rows && result(j, i) == 0)
+                    {
+                        ++j;
+                    }
+
+                    if (j == rows)
+                    {
+                        throw std::invalid_argument("Matrix is not invertible");
+                    }
+
+                    result.swapRows(i, j);
+                }
+
+                for (size_t j = i + 1; j < rows; ++j)
+                {
+                    T coef = result(j, i) / result(i, i);
+                    for (size_t k = i; k < cols; ++k)
+                    {
+                        result(j, k) -= coef * result(i, k);
+                    }
+                }
+            }
+
+            for (size_t i = rows - 1; i > 0; --i)
+            {
+                for (size_t j = i - 1; j < rows; --j)
+                {
+                    T coef = result(j, i) / result(i, i);
+                    for (size_t k = i; k < cols; ++k)
+                    {
+                        result(j, k) -= coef * result(i, k);
+                    }
+                }
+            }
+
+            for (size_t i = 0; i < rows; ++i)
+            {
+                T coef = result(i, i);
+                for (size_t j = i; j < cols; ++j)
+                {
+                    result(i, j) /= coef;
+                }
+            }
+
+            std::vector<T> x(rows);
+            for (size_t i = 0; i < rows; ++i)
+            {
+                x[i] = result(i, cols - 1);
+            }
+
+            return x;
+        }
     };
 
     template <typename T>

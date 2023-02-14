@@ -334,4 +334,65 @@ namespace KSI
         this->denominator = 1;
         return *this;
     }
+
+    fraction &fraction::operator+=(int i)
+    {
+        throw std::runtime_error("Not implemented");
+    }
+    fraction &fraction::operator-=(int i)
+    {
+        throw std::runtime_error("Not implemented");
+    }
+    fraction &fraction::operator*=(int i)
+    {
+        return *this *= fraction(i);
+    }
+    fraction &fraction::operator/=(int i)
+    {
+        throw std::runtime_error("Not implemented");
+    }
+
+    fraction fraction::operator+(int i) const
+    {
+        throw std::runtime_error("Not implemented");
+    }
+    fraction fraction::operator-(int i) const
+    {
+        throw std::runtime_error("Not implemented");
+    }
+    fraction fraction::operator*(int i) const
+    {
+        auto tmp = *this;
+        tmp *= i;
+        return tmp;
+    }
+    fraction fraction::operator/(int i) const
+    {
+        throw std::runtime_error("Not implemented");
+    }
+
+    bool fraction::operator==(int i) const
+    {
+        return this->numerator == i && this->denominator == 1;
+    }
+    bool fraction::operator!=(int i) const
+    {
+        throw std::runtime_error("Not implemented");
+    }
+    bool fraction::operator<(int i) const
+    {
+        throw std::runtime_error("Not implemented");
+    }
+    bool fraction::operator>(int i) const
+    {
+        throw std::runtime_error("Not implemented");
+    }
+    bool fraction::operator<=(int i) const
+    {
+        throw std::runtime_error("Not implemented");
+    }
+    bool fraction::operator>=(int i) const
+    {
+        throw std::runtime_error("Not implemented");
+    }
 }
