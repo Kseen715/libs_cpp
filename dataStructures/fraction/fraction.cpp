@@ -406,4 +406,47 @@ namespace KSI
     {
         return this->numerator >= i * this->denominator;
     }
+
+    Fraction operator*(int i, const Fraction &f)
+    {
+        return f * i;
+    }
+    Fraction operator/(int i, const Fraction &f)
+    {
+        return f / i;
+    }
+    Fraction operator+(int i, const Fraction &f)
+    {
+        return f + i;
+    }
+    Fraction operator-(int i, const Fraction &f)
+    {
+        return f - i;
+    }
+
+    bool operator==(int i, const Fraction &f)
+    {
+        return f == i;
+    }
+    bool operator!=(int i, const Fraction &f)
+    {
+        return f != i;
+    }
+    bool operator<(int i, const Fraction &f)
+    {
+        return f > i;
+    }
+    bool operator>(int i, const Fraction &f)
+    {
+        return f < i;
+    }
+    bool operator<=(int i, const Fraction &f)
+    {
+        return f >= i;
+    }
+    bool operator>=(int i, const Fraction &f)
+    {
+        return f <= i;
+    }
+
 }

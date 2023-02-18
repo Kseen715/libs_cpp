@@ -45,12 +45,14 @@ namespace BaseTypes
 
 namespace KSI
 {
-        struct Fraction
+        class Fraction
         {
+        protected:
                 BaseTypes::fractionBaseType numerator;
                 BaseTypes::fractionBaseType denominator;
                 bool autoReduce = true;
 
+        public:
                 Fraction();
                 Fraction(int i);
                 Fraction(double d);
@@ -132,7 +134,30 @@ namespace KSI
                 bool operator>(int i) const;
                 bool operator<=(int i) const;
                 bool operator>=(int i) const;
+
+                friend Fraction operator*(int i, const Fraction &f);
+                friend Fraction operator/(int i, const Fraction &f);
+                friend Fraction operator+(int i, const Fraction &f);
+                friend Fraction operator-(int i, const Fraction &f);
+                friend bool operator==(int i, const Fraction &f);
+                friend bool operator!=(int i, const Fraction &f);
+                friend bool operator<(int i, const Fraction &f);
+                friend bool operator>(int i, const Fraction &f);
+                friend bool operator<=(int i, const Fraction &f);
+                friend bool operator>=(int i, const Fraction &f);
         };
+
+        Fraction operator*(int i, const Fraction &f);
+        Fraction operator/(int i, const Fraction &f);
+        Fraction operator+(int i, const Fraction &f);
+        Fraction operator-(int i, const Fraction &f);
+        bool operator==(int i, const Fraction &f);
+        bool operator!=(int i, const Fraction &f);
+        bool operator<(int i, const Fraction &f);
+        bool operator>(int i, const Fraction &f);
+        bool operator<=(int i, const Fraction &f);
+        bool operator>=(int i, const Fraction &f);
+
 }
 
 #endif // __KSI_FRACTION_HPP
