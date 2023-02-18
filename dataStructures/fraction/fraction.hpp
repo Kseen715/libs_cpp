@@ -1,11 +1,11 @@
 /*
-RUS: Структура fraction представляет собой дробь, которая может быть
+RUS: Структура Fraction представляет собой дробь, которая может быть
 представлена в виде числителя и знаменателя.
 
 Я не тестировал этот код, но он должен работать. Для написания исходного кода
 были использованы технологии Copilot и ChatGPT.
 
-ENG: The fraction structure represents a fraction that can be
+ENG: The Fraction structure represents a Fraction that can be
 represented as a numerator and denominator.
 
 MIT License
@@ -38,71 +38,71 @@ This file is part of KSI.
 #include <iostream>
 #include <cstdlib>
 
-namespace baseTypes
+namespace BaseTypes
 {
         typedef long long fractionBaseType;
 }
 
 namespace KSI
 {
-        struct fraction
+        struct Fraction
         {
-                baseTypes::fractionBaseType numerator;
-                baseTypes::fractionBaseType denominator;
+                BaseTypes::fractionBaseType numerator;
+                BaseTypes::fractionBaseType denominator;
                 bool autoReduce = true;
 
-                fraction();
-                fraction(int i);
-                fraction(double d);
-                fraction(baseTypes::fractionBaseType numerator,
-                         baseTypes::fractionBaseType denominator);
-                fraction(const fraction &f);
+                Fraction();
+                Fraction(int i);
+                Fraction(double d);
+                Fraction(BaseTypes::fractionBaseType numerator,
+                         BaseTypes::fractionBaseType denominator);
+                Fraction(const Fraction &f);
 
-                ~fraction();
+                ~Fraction();
 
-                fraction &operator=(const fraction &f);
-                fraction &operator+=(const fraction &f);
-                fraction &operator-=(const fraction &f);
-                fraction &operator*=(const fraction &f);
-                fraction &operator/=(const fraction &f);
-                fraction &operator++();
-                fraction &operator--();
-                fraction operator++(int);
-                fraction operator--(int);
-                fraction operator-() const;
-                fraction operator+() const;
+                Fraction &operator=(const Fraction &f);
+                Fraction &operator+=(const Fraction &f);
+                Fraction &operator-=(const Fraction &f);
+                Fraction &operator*=(const Fraction &f);
+                Fraction &operator/=(const Fraction &f);
+                Fraction &operator++();
+                Fraction &operator--();
+                Fraction operator++(int);
+                Fraction operator--(int);
+                Fraction operator-() const;
+                Fraction operator+() const;
 
-                fraction operator+(const fraction &f) const;
-                fraction operator-(const fraction &f) const;
-                fraction operator*(const fraction &f) const;
-                fraction operator/(const fraction &f) const;
+                Fraction operator+(const Fraction &f) const;
+                Fraction operator-(const Fraction &f) const;
+                Fraction operator*(const Fraction &f) const;
+                Fraction operator/(const Fraction &f) const;
 
-                bool operator==(const fraction &f) const;
-                bool operator!=(const fraction &f) const;
-                bool operator<(const fraction &f) const;
-                bool operator>(const fraction &f) const;
-                bool operator<=(const fraction &f) const;
-                bool operator>=(const fraction &f) const;
+                bool operator==(const Fraction &f) const;
+                bool operator!=(const Fraction &f) const;
+                bool operator<(const Fraction &f) const;
+                bool operator>(const Fraction &f) const;
+                bool operator<=(const Fraction &f) const;
+                bool operator>=(const Fraction &f) const;
 
                 operator double() const;
 
-                baseTypes::fractionBaseType gcd(baseTypes::fractionBaseType a,
-                                                baseTypes::fractionBaseType b)
+                BaseTypes::fractionBaseType gcd(BaseTypes::fractionBaseType a,
+                                                BaseTypes::fractionBaseType b)
                     const;
-                baseTypes::fractionBaseType lcm(baseTypes::fractionBaseType a,
-                                                baseTypes::fractionBaseType b)
+                BaseTypes::fractionBaseType lcm(BaseTypes::fractionBaseType a,
+                                                BaseTypes::fractionBaseType b)
                     const;
 
                 friend std::ostream &operator<<(std::ostream &os,
-                                                const fraction &f);
+                                                const Fraction &f);
                 friend std::istream &operator>>(std::istream &is,
-                                                fraction &f);
+                                                Fraction &f);
 
-                baseTypes::fractionBaseType getNumerator() const;
-                baseTypes::fractionBaseType getDenominator() const;
+                BaseTypes::fractionBaseType getNumerator() const;
+                BaseTypes::fractionBaseType getDenominator() const;
 
-                void setNumerator(baseTypes::fractionBaseType numerator);
-                void setDenominator(baseTypes::fractionBaseType denominator);
+                void setNumerator(BaseTypes::fractionBaseType numerator);
+                void setDenominator(BaseTypes::fractionBaseType denominator);
 
                 void reduce();
 
@@ -115,16 +115,16 @@ namespace KSI
                 void negate();
 
                 // cast int to fraction
-                fraction &operator=(int i);
-                fraction &operator+=(int i);
-                fraction &operator-=(int i);
-                fraction &operator*=(int i);
-                fraction &operator/=(int i);
+                Fraction &operator=(int i);
+                Fraction &operator+=(int i);
+                Fraction &operator-=(int i);
+                Fraction &operator*=(int i);
+                Fraction &operator/=(int i);
 
-                fraction operator+(int i) const;
-                fraction operator-(int i) const;
-                fraction operator*(int i) const;
-                fraction operator/(int i) const;
+                Fraction operator+(int i) const;
+                Fraction operator-(int i) const;
+                Fraction operator*(int i) const;
+                Fraction operator/(int i) const;
 
                 bool operator==(int i) const;
                 bool operator!=(int i) const;
@@ -132,9 +132,6 @@ namespace KSI
                 bool operator>(int i) const;
                 bool operator<=(int i) const;
                 bool operator>=(int i) const;
-
-                
-
         };
 }
 

@@ -2,17 +2,17 @@
 
 namespace KSI
 {
-    fraction::fraction() = default;
+    Fraction::Fraction() = default;
 
-    fraction::fraction(int i)
+    Fraction::Fraction(int i)
     {
         this->numerator = i;
         this->denominator = 1;
     }
 
-    fraction::fraction(double d)
+    Fraction::Fraction(double d)
     {
-        this->numerator = d * 1000000000;
+        this->numerator = (BaseTypes::fractionBaseType)(d * 1000000000);
         this->denominator = 1000000000;
         if (this->autoReduce)
         {
@@ -20,8 +20,8 @@ namespace KSI
         }
     }
 
-    fraction::fraction(baseTypes::fractionBaseType numerator,
-                       baseTypes::fractionBaseType denominator)
+    Fraction::Fraction(BaseTypes::fractionBaseType numerator,
+                       BaseTypes::fractionBaseType denominator)
     {
         this->numerator = numerator;
         this->denominator = denominator;
@@ -31,7 +31,7 @@ namespace KSI
         }
     }
 
-    fraction::fraction(const fraction &other)
+    Fraction::Fraction(const Fraction &other)
     {
         this->numerator = other.numerator;
         this->denominator = other.denominator;
@@ -41,16 +41,16 @@ namespace KSI
         }
     }
 
-    fraction::~fraction() = default;
+    Fraction::~Fraction() = default;
 
-    fraction &fraction::operator=(const fraction &other)
+    Fraction &Fraction::operator=(const Fraction &other)
     {
         this->numerator = other.numerator;
         this->denominator = other.denominator;
         return *this;
     }
 
-    fraction &fraction::operator+=(const fraction &other)
+    Fraction &Fraction::operator+=(const Fraction &other)
     {
         this->numerator = this->numerator * other.denominator +
                           other.numerator * this->denominator;
@@ -62,7 +62,7 @@ namespace KSI
         return *this;
     }
 
-    fraction &fraction::operator-=(const fraction &other)
+    Fraction &Fraction::operator-=(const Fraction &other)
     {
         this->numerator = this->numerator * other.denominator -
                           other.numerator * this->denominator;
@@ -74,7 +74,7 @@ namespace KSI
         return *this;
     }
 
-    fraction &fraction::operator*=(const fraction &other)
+    Fraction &Fraction::operator*=(const Fraction &other)
     {
         this->numerator = this->numerator * other.numerator;
         this->denominator = this->denominator * other.denominator;
@@ -85,7 +85,7 @@ namespace KSI
         return *this;
     }
 
-    fraction &fraction::operator/=(const fraction &other)
+    Fraction &Fraction::operator/=(const Fraction &other)
     {
         this->numerator = this->numerator * other.denominator;
         this->denominator = this->denominator * other.numerator;
@@ -96,7 +96,7 @@ namespace KSI
         return *this;
     }
 
-    fraction &fraction::operator++()
+    Fraction &Fraction::operator++()
     {
         this->numerator += this->denominator;
         if (this->autoReduce)
@@ -106,7 +106,7 @@ namespace KSI
         return *this;
     }
 
-    fraction &fraction::operator--()
+    Fraction &Fraction::operator--()
     {
         this->numerator -= this->denominator;
         if (this->autoReduce)
@@ -116,9 +116,9 @@ namespace KSI
         return *this;
     }
 
-    fraction fraction::operator++(int)
+    Fraction Fraction::operator++(int)
     {
-        fraction tmp(*this);
+        Fraction tmp(*this);
         ++(*this);
         if (this->autoReduce)
         {
@@ -127,9 +127,9 @@ namespace KSI
         return tmp;
     }
 
-    fraction fraction::operator--(int)
+    Fraction Fraction::operator--(int)
     {
-        fraction tmp(*this);
+        Fraction tmp(*this);
         --(*this);
         if (this->autoReduce)
         {
@@ -138,92 +138,92 @@ namespace KSI
         return tmp;
     }
 
-    fraction fraction::operator-() const
+    Fraction Fraction::operator-() const
     {
-        return fraction(-this->numerator, this->denominator);
+        return Fraction(-this->numerator, this->denominator);
     }
 
-    fraction fraction::operator+() const
+    Fraction Fraction::operator+() const
     {
-        return fraction(this->numerator, this->denominator);
+        return Fraction(this->numerator, this->denominator);
     }
 
-    fraction fraction::operator+(const fraction &other) const
+    Fraction Fraction::operator+(const Fraction &other) const
     {
-        return fraction(*this) += other;
+        return Fraction(*this) += other;
     }
 
-    fraction fraction::operator-(const fraction &other) const
+    Fraction Fraction::operator-(const Fraction &other) const
     {
-        return fraction(*this) -= other;
+        return Fraction(*this) -= other;
     }
 
-    fraction fraction::operator*(const fraction &other) const
+    Fraction Fraction::operator*(const Fraction &other) const
     {
-        return fraction(*this) *= other;
+        return Fraction(*this) *= other;
     }
 
-    fraction fraction::operator/(const fraction &other) const
+    Fraction Fraction::operator/(const Fraction &other) const
     {
-        return fraction(*this) /= other;
+        return Fraction(*this) /= other;
     }
 
-    bool fraction::operator==(const fraction &other) const
+    bool Fraction::operator==(const Fraction &other) const
     {
         return this->numerator == other.numerator &&
                this->denominator == other.denominator;
     }
 
-    bool fraction::operator!=(const fraction &other) const
+    bool Fraction::operator!=(const Fraction &other) const
     {
         return !(*this == other);
     }
 
-    bool fraction::operator<(const fraction &other) const
+    bool Fraction::operator<(const Fraction &other) const
     {
         return this->numerator * other.denominator <
                other.numerator * this->denominator;
     }
 
-    bool fraction::operator>(const fraction &other) const
+    bool Fraction::operator>(const Fraction &other) const
     {
         return this->numerator * other.denominator >
                other.numerator * this->denominator;
     }
 
-    bool fraction::operator<=(const fraction &other) const
+    bool Fraction::operator<=(const Fraction &other) const
     {
         return this->numerator * other.denominator <=
                other.numerator * this->denominator;
     }
 
-    bool fraction::operator>=(const fraction &other) const
+    bool Fraction::operator>=(const Fraction &other) const
     {
         return this->numerator * other.denominator >=
                other.numerator * this->denominator;
     }
 
-    baseTypes::fractionBaseType fraction::getNumerator() const
+    BaseTypes::fractionBaseType Fraction::getNumerator() const
     {
         return this->numerator;
     }
 
-    baseTypes::fractionBaseType fraction::getDenominator() const
+    BaseTypes::fractionBaseType Fraction::getDenominator() const
     {
         return this->denominator;
     }
 
-    void fraction::setNumerator(baseTypes::fractionBaseType numerator)
+    void Fraction::setNumerator(BaseTypes::fractionBaseType numerator)
     {
         this->numerator = numerator;
     }
 
-    void fraction::setDenominator(baseTypes::fractionBaseType denominator)
+    void Fraction::setDenominator(BaseTypes::fractionBaseType denominator)
     {
         this->denominator = denominator;
     }
 
-    std::ostream &operator<<(std::ostream &os, const fraction &f)
+    std::ostream &operator<<(std::ostream &os, const Fraction &f)
     {
         if (f.getDenominator() == 1)
         {
@@ -234,9 +234,9 @@ namespace KSI
         return os;
     }
 
-    std::istream &operator>>(std::istream &is, fraction &f)
+    std::istream &operator>>(std::istream &is, Fraction &f)
     {
-        baseTypes::fractionBaseType numerator, denominator;
+        BaseTypes::fractionBaseType numerator, denominator;
         is >> numerator >> denominator;
         f.setNumerator(numerator);
         f.setDenominator(denominator);
@@ -247,34 +247,34 @@ namespace KSI
         return is;
     }
 
-    fraction operator+(const fraction &f1, const fraction &f2)
+    Fraction operator+(const Fraction &f1, const Fraction &f2)
     {
-        return fraction(f1) += f2;
+        return Fraction(f1) += f2;
     }
 
-    fraction operator-(const fraction &f1, const fraction &f2)
+    Fraction operator-(const Fraction &f1, const Fraction &f2)
     {
-        return fraction(f1) -= f2;
+        return Fraction(f1) -= f2;
     }
 
-    fraction operator*(const fraction &f1, const fraction &f2)
+    Fraction operator*(const Fraction &f1, const Fraction &f2)
     {
-        return fraction(f1) *= f2;
+        return Fraction(f1) *= f2;
     }
 
-    fraction operator/(const fraction &f1, const fraction &f2)
+    Fraction operator/(const Fraction &f1, const Fraction &f2)
     {
-        return fraction(f1) /= f2;
+        return Fraction(f1) /= f2;
     }
 
-    fraction::operator double() const
+    Fraction::operator double() const
     {
         return static_cast<double>(this->numerator) /
                static_cast<double>(this->denominator);
     }
 
-    baseTypes::fractionBaseType fraction::gcd(baseTypes::fractionBaseType a,
-                                              baseTypes::fractionBaseType b)
+    BaseTypes::fractionBaseType Fraction::gcd(BaseTypes::fractionBaseType a,
+                                              BaseTypes::fractionBaseType b)
         const
     {
         if (a == 0)
@@ -282,23 +282,28 @@ namespace KSI
         return gcd(b % a, a);
     }
 
-    baseTypes::fractionBaseType fraction::lcm(baseTypes::fractionBaseType a,
-                                              baseTypes::fractionBaseType b)
+    BaseTypes::fractionBaseType Fraction::lcm(BaseTypes::fractionBaseType a,
+                                              BaseTypes::fractionBaseType b)
         const
     {
         return (a * b) / gcd(a, b);
     }
 
-    void fraction::reduce()
+    void Fraction::reduce()
     {
-        baseTypes::fractionBaseType g = gcd(this->numerator, this->denominator);
+        BaseTypes::fractionBaseType g = gcd(this->numerator, this->denominator);
         this->numerator /= g;
         this->denominator /= g;
+        if (this->denominator < 0)
+        {
+            this->numerator = -this->numerator;
+            this->denominator = -this->denominator;
+        }
     }
 
-    void fraction::invert()
+    void Fraction::invert()
     {
-        baseTypes::fractionBaseType tmp = this->numerator;
+        BaseTypes::fractionBaseType tmp = this->numerator;
         this->numerator = this->denominator;
         this->denominator = tmp;
         if (this->autoReduce)
@@ -307,92 +312,98 @@ namespace KSI
         }
     }
 
-    void fraction::abs()
+    void Fraction::abs()
     {
         this->numerator = std::abs(this->numerator);
         this->denominator = std::abs(this->denominator);
     }
 
-    void fraction::negate()
+    void Fraction::negate()
     {
         this->numerator = -this->numerator;
     }
 
-    bool fraction::isAutoReduce() const
+    bool Fraction::isAutoReduce() const
     {
         return this->autoReduce;
     }
 
-    void fraction::setAutoReduce(bool autoReduce)
+    void Fraction::setAutoReduce(bool autoReduce)
     {
         this->autoReduce = autoReduce;
     }
 
-    fraction &fraction::operator=(int i)
+    Fraction &Fraction::operator=(int i)
     {
         this->numerator = i;
         this->denominator = 1;
         return *this;
     }
 
-    fraction &fraction::operator+=(int i)
+    Fraction &Fraction::operator+=(int i)
     {
-        throw std::runtime_error("Not implemented");
+        return *this += Fraction(i);
     }
-    fraction &fraction::operator-=(int i)
+    Fraction &Fraction::operator-=(int i)
     {
-        throw std::runtime_error("Not implemented");
+        return *this -= Fraction(i);
     }
-    fraction &fraction::operator*=(int i)
+    Fraction &Fraction::operator*=(int i)
     {
-        return *this *= fraction(i);
+        return *this *= Fraction(i);
     }
-    fraction &fraction::operator/=(int i)
+    Fraction &Fraction::operator/=(int i)
     {
-        throw std::runtime_error("Not implemented");
+        return *this /= Fraction(i);
     }
 
-    fraction fraction::operator+(int i) const
+    Fraction Fraction::operator+(int i) const
     {
-        throw std::runtime_error("Not implemented");
+        auto tmp = *this;
+        tmp += i;
+        return tmp;
     }
-    fraction fraction::operator-(int i) const
+    Fraction Fraction::operator-(int i) const
     {
-        throw std::runtime_error("Not implemented");
+        auto tmp = *this;
+        tmp -= i;
+        return tmp;
     }
-    fraction fraction::operator*(int i) const
+    Fraction Fraction::operator*(int i) const
     {
         auto tmp = *this;
         tmp *= i;
         return tmp;
     }
-    fraction fraction::operator/(int i) const
+    Fraction Fraction::operator/(int i) const
     {
-        throw std::runtime_error("Not implemented");
+        auto tmp = *this;
+        tmp /= i;
+        return tmp;
     }
 
-    bool fraction::operator==(int i) const
+    bool Fraction::operator==(int i) const
     {
         return this->numerator == i && this->denominator == 1;
     }
-    bool fraction::operator!=(int i) const
+    bool Fraction::operator!=(int i) const
     {
-        throw std::runtime_error("Not implemented");
+        return !(*this == i);
     }
-    bool fraction::operator<(int i) const
+    bool Fraction::operator<(int i) const
     {
-        throw std::runtime_error("Not implemented");
+        return this->numerator < i * this->denominator;
     }
-    bool fraction::operator>(int i) const
+    bool Fraction::operator>(int i) const
     {
-        throw std::runtime_error("Not implemented");
+        return this->numerator > i * this->denominator;
     }
-    bool fraction::operator<=(int i) const
+    bool Fraction::operator<=(int i) const
     {
-        throw std::runtime_error("Not implemented");
+        return this->numerator <= i * this->denominator;
     }
-    bool fraction::operator>=(int i) const
+    bool Fraction::operator>=(int i) const
     {
-        throw std::runtime_error("Not implemented");
+        return this->numerator >= i * this->denominator;
     }
 }
