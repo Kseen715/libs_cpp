@@ -2,14 +2,14 @@
 set(CMAKE_MIN_VERSION "3.8")            # Required CMake version.
 set(CMAKE_CXX_STANDARD 20)              # C++ standard.
 set(CMAKE_CXX_STANDARD_REQUIRED ON)     # C++ standard required.
-set(PROJECT_NAME "")                    # Name of the project.
+set(PROJECT_NAME "oop_5")               # Name of the project.
 set(PROJECT_VERSION "0.1.0")            # Version of the project.
-set(PROJECT_EXE_NAME "main")            # Name of the executable to be created.
+set(PROJECT_EXE_NAME ${PROJECT_NAME})   # Name of the executable to be created.
 set(KSI_GTEST_DO OFF)                   # GTest (ON/OFF).
 set(KSI_GTEST_CC_NAME "KSI_unitTest")   # Name for GTest executable.
 set(KSI_GTEST_CC_FILE "test.cc")        # Name for GTest source file.
 set(ADD_LIBS OFF)                       # Add libraries (ON/OFF).
-set(LIBS "")                            # Libraries to be included.
+set(LIBS "oopString")                      # Libraries to be included.
 set(SOURCE_FILES "main.cpp")            # Source files.
 # ==============================================================================
 

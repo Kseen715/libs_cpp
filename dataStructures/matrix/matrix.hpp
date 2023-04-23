@@ -124,12 +124,20 @@ namespace KSI
         std::vector<std::vector<T>> getData() const;
 
         /**
-         * @brief Функция возвращает элемент матрицы по индексу.
+         * @brief Функция возвращает элемент матрицы по индексу столбец-строка.
          * @param col Индекс столбца.
          * @param row Индекс строки.
          * @return Элемент матрицы.
          */
         T &at(size_t col, size_t row);
+
+        /**
+         * @brief Функция возвращает элемент матрицы по индексу строка-столбец.
+         * @param row Индекс строки.
+         * @param col Индекс столбца.
+         * @return Элемент матрицы.
+         */
+        T &atRC(size_t row, size_t col);
 
         /**
          * @brief Функция возвращает элемент матрицы по индексу.
@@ -293,6 +301,18 @@ namespace KSI
          * в противном случае.
          */
         Matrix<T> makeSquare();
+
+        /**
+         * @brief Функция приводит матрицу к треугольному виду.
+         * @return Треугольная матрица.
+         */
+        Matrix<T> makeTriangle();
+
+        /**
+         * @brief Функция, которая удаляет последний столбец из матрицы.
+         * @return Столбец, который был удален.
+         */
+        std::vector<T> popBackColumn();
     };
 
     template <typename T>
@@ -421,6 +441,12 @@ namespace KSI
                                     "[at(size_t col, size_t row)]");
         }
         return data.at(col).at(row);
+    }
+
+    template <typename T>
+    T &Matrix<T>::atRC(size_t row, size_t col)
+    {
+        return at(col, row);
     }
 
     template <typename T>
@@ -1097,6 +1123,70 @@ namespace KSI
         }
         return ss.str();
     }
+
+    /**
+     * @brief Возвращает строку с системой линейных уравнений.
+     * @param mtr Матрица коэффициентов и свободных членов.
+     * @param vars Вектор переменных.
+     * @return Строка с системой линейных уравнений.
+     */
+    template <typename T>
+    std::string getSysLinEqString(const Matrix<T> &mtr,
+                                  std::vector<std::string> vars =
+                                      std::vector<std::string>())
+    {
+        auto m = mtr;
+        std::vector<T> vec = m.popBackColumn();
+
+        return getSysLinEqString(m, vec, vars);
+    }
+
+    template <typename T>
+    Matrix<T> Matrix<T>::makeTriangle()
+    {
+        for (size_t i = 0; i < rows; ++i)
+        {
+            if (data[i][i] == 0)
+            {
+                size_t j = i + 1;
+                while (j < rows && data[j][i] == 0)
+                {
+                    ++j;
+                }
+
+                if (j == rows)
+                {
+                    return *this;
+                }
+
+                swapRows(i, j);
+            }
+
+            for (size_t j = i + 1; j < rows; ++j)
+            {
+                T coef = data[i][j] / data[i][i];
+                for (size_t k = i; k < cols; ++k)
+                {
+                    data[k][j] -= coef * data[k][i];
+                }
+            }
+        }
+
+        return *this;
+    }
+
+    template <typename T>
+    std::vector<T> Matrix<T>::popBackColumn()
+    {
+        std::vector<T> result(rows);
+        for (size_t i = 0; i < rows; ++i)
+        {
+            result[i] = data[cols - 1][i];
+        }
+        --cols;
+        return result;
+    }
+
 }
 
 #endif // __KSI_MATRIX_HPP
