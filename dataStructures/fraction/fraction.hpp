@@ -2,9 +2,6 @@
 RUS: Структура Fraction представляет собой дробь, которая может быть
 представлена в виде числителя и знаменателя.
 
-Я не тестировал этот код, но он должен работать. Для написания исходного кода
-были использованы технологии Copilot и ChatGPT.
-
 ENG: The Fraction structure represents a Fraction that can be
 represented as a numerator and denominator.
 

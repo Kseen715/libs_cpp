@@ -269,6 +269,12 @@ namespace KSI
 
     Fraction::operator double() const
     {
+        if (this->denominator == 0)
+        {
+            throw std::runtime_error(
+                "Fraction::operator double() - denominator == 0. Division by "
+                "zero.");
+        }
         return static_cast<double>(this->numerator) /
                static_cast<double>(this->denominator);
     }
@@ -292,6 +298,11 @@ namespace KSI
     void Fraction::reduce()
     {
         BaseTypes::fractionBaseType g = gcd(this->numerator, this->denominator);
+        if (g == 0)
+        {
+            throw std::runtime_error(
+                "Fraction::reduce() - g == 0. Division by zero.");
+        }
         this->numerator /= g;
         this->denominator /= g;
         if (this->denominator < 0)
@@ -378,6 +389,11 @@ namespace KSI
     Fraction Fraction::operator/(int i) const
     {
         auto tmp = *this;
+        if (i == 0)
+        {
+            throw std::runtime_error(
+                "Fraction::operator/(int) - i == 0. Division by zero.");
+        }
         tmp /= i;
         return tmp;
     }
@@ -413,6 +429,11 @@ namespace KSI
     }
     Fraction operator/(int i, const Fraction &f)
     {
+        if (f.getNumerator() == 0 || i == 0)
+        {
+            throw std::runtime_error(
+                "operator/(int, Fraction) - Division by zero.");
+        }
         return f / i;
     }
     Fraction operator+(int i, const Fraction &f)
@@ -448,5 +469,4 @@ namespace KSI
     {
         return f <= i;
     }
-
 }
