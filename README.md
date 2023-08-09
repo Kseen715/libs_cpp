@@ -1,6 +1,6 @@
 # libs
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Kseen715/imgs/main/favicon.ico?token=GHSAT0AAAAAABZP3VEEX2RTOIF434CW37Q4Y4TPXMA" />
+  <img src="https://raw.githubusercontent.com/Kseen715/imgs/main/favicon.ico" />
 </p>
 
 Сборная солянка мелких библиотек.
